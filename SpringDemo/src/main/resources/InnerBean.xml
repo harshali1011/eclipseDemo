@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+   <bean id = "triangle" class = "InjectingObjPkg.TriangleConst">
+   <property name="pointA" ref="zeroPoint">
+   <idref= "zeroPoint" />  <!--  the refernce we are adding is id specific -->
+   </property>
+    <property name="pointB" >
+    	<bean  class = "InjectingObjPkg.Point"> <!-- Inner bean :When we need a specific object to be used by a specific class  -->    	
+		   <property name="x" value="-20"/>
+		   <property name="y" value="0"/>
+		   </bean>
+    </property>
+    
+    <property name="pointC" >
+    	<bean id = "point3" class = "InjectingObjPkg.Point"> <!-- we isolate the bean and we do not require any bean id -->
+		   <property name="x" value="0"/>
+		   <property name="y" value="20"/>
+		   </bean>
+    </property>
+   </bean>
+   
+   <bean id = "zeroPoint" class = "InjectingObjPkg.Point">
+   <property name="x" value="0"/>
+   <property name="y" value="0"/>
+   </bean>
+   
+	<alias name="triangle" alias="triangle-alias"/> <!-- we can give multiple names to our bean and used them -->
+   
+   
+</beans>
